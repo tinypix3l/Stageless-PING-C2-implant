@@ -28,7 +28,7 @@ def start_sniffing(target_ip):
     sniff(filter=f"icmp and src host {target_ip}", prn=process_packet)
 
 def main():
-    target_ip = input("Enter Victim's IP:")  # Replace with your client's IP address
+    target_ip = input("Enter Victim's IP:")  # Your client's IP address input
 
     # Start the packet sniffing in a separate subprocess
     sniff_thread = threading.Thread(target=start_sniffing, args=(target_ip,), daemon=True)
